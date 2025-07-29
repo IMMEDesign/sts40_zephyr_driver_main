@@ -1,0 +1,50 @@
+# Copyright (c) 2025
+# SPDX-License-Identifier: Apache-2.0
+
+config STS40
+	bool "STS40 Temperature Sensor"
+	default n
+	depends on DT_HAS_SENSIRION_STS40_ENABLED
+	depends on I2C
+	help
+	  Enable driver for Sensirion STS40 digital temperature sensor.
+	  The STS40 is a digital temperature sensor with I2C interface.
+	  It provides high accuracy temperature measurements with different
+	  precision levels (high, medium, low).
+
+if STS40
+
+config STS40_USE_SENSIRION_LIB
+	bool "Use original Sensirion library implementation"
+	default n
+	help
+	  Use the original Sensirion embedded-i2c-sts4x library implementation
+	  instead of the native Zephyr driver. This provides compatibility with
+	  existing Sensirion code but requires additional source files.
+
+choice STS40_PRECISION
+	prompt "Default measurement precision"
+	default STS40_PRECISION_HIGH
+	help
+	  Select the default measurement precision for STS40 sensor.
+	  Higher precision provides more accurate results but takes longer
+	  to complete the measurement.
+
+config STS40_PRECISION_HIGH
+	bool "High precision"
+	help
+	  Use high precision mode (longest measurement time, highest accuracy).
+
+config STS40_PRECISION_MEDIUM
+	bool "Medium precision"
+	help
+	  Use medium precision mode (medium measurement time and accuracy).
+
+config STS40_PRECISION_LOW
+	bool "Low precision"
+	help
+	  Use low precision mode (shortest measurement time, lowest accuracy).
+
+endchoice
+
+endif # STS40

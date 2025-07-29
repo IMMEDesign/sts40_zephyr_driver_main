@@ -1,0 +1,30 @@
+# Copyright (c) 2025
+# SPDX-License-Identifier: Apache-2.0
+
+description: Sensirion STS40 Digital Temperature Sensor
+
+compatible: "sensirion,sts40"
+
+include: [sensor-device.yaml, i2c-device.yaml]
+
+properties:
+  precision:
+    type: string
+    default: "high"
+    enum:
+      - "high"
+      - "medium" 
+      - "low"
+    description: |
+      Measurement precision level:
+      - high: Highest accuracy, longest measurement time (~10ms)
+      - medium: Medium accuracy, medium measurement time (~10ms)  
+      - low: Lowest accuracy, shortest measurement time (~10ms)
+
+  reg:
+    required: true
+    description: |
+      I2C address of the sensor. The STS40 supports three different addresses:
+      - 0x46 (primary/default address)
+      - 0x44 (alternative address 1)
+      - 0x45 (alternative address 2)

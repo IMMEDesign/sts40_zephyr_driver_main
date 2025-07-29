@@ -1,0 +1,21 @@
+/*
+ * Copyright (c) 2025
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/* 
+ * Device tree overlay for STS40 temperature sensor
+ * This example assumes the sensor is connected to I2C0
+ * Adjust the I2C bus and pins according to your hardware setup
+ */
+
+&i2c0 {
+    status = "okay";
+    
+    sts40: sts40@46 {
+        compatible = "sensirion,sts40";
+        reg = <0x46>;  /* Primary I2C address */
+        precision = "high";  /* high, medium, or low */
+        status = "okay";
+    };
+};

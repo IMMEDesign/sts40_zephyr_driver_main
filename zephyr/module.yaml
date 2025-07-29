@@ -1,0 +1,6 @@
+name: sts40-driver
+build:
+    cmake: .
+    kconfig: Kconfig
+    settings:
+      dts_root: .
